@@ -1,367 +1,237 @@
-# AMML (Advanced Modular Markup Language)
+# AMML Language Support for Visual Studio Code
 
-> Build organized, modular, and extensible web applications with a powerful plugin-based markup language.
+> Official Visual Studio Code extension for **AMML (Advanced Modular Markup Language)**.
 
-AMML (Advanced Modular Markup Language) is an open-source markup language designed to improve the organization of HTML projects without replacing the web itself. Instead of writing a single large HTML file, AMML lets you split your application into reusable components, modules, and plugins, compiling everything into a standard HTML, XML, or JSON output.
-
-The final result is plain web code that can run anywhere: browsers, Electron, servers, or any environment capable of reading HTML.
+Bring a modern development experience to AMML with syntax highlighting, IntelliSense, formatting, diagnostics, hover documentation, and embedded JavaScript/CSS language support.
 
 ---
 
-## Why AMML?
+# ✨ Features
 
-Writing large HTML projects usually becomes difficult over time.
+## 🎨 Syntax Highlighting
 
-AMML solves this by introducing:
+AMML files are highlighted using your current VS Code theme, providing a clean and familiar editing experience.
 
-- 📦 Modular project structure
-- 🔌 Extensible plugin system
-- ⚡ Fast compilation
-- 🧩 Reusable components
-- 🛠 Simple CLI
-- 🌐 HTML / XML / JSON output
-- 📄 Standard HTML generation
-- 🔍 Debug compilation mode
-- 💾 URL cache system
-- 🧪 Plugin development tools
+Features include:
+
+- Special tag highlighting
+- Metadata highlighting
+- XML-based syntax
+- Embedded language detection
+- Theme-aware colors (Light, Dark, High Contrast, etc.)
 
 ---
 
-# Installation
+## 🚀 Formatter
 
-Clone the repository and install the dependencies:
+Format your entire document with a single shortcut.
 
-```bash
-npm install
+```
+Shift + Alt + F
 ```
 
-Make it global (if you don't want, you can still use node index.js)
-```bash
-npm link
-```
-
-You can then use the CLI:
-
-```bash
-amml help
-```
-
----
-
-# Language Overview
-
-AMML keeps an XML-based syntax to simplify parsing while remaining easy to read.
+The formatter understands AMML syntax while preserving embedded JavaScript and CSS.
 
 Example:
+
+Before
+
+```xml
+<!AMML"master">
+<window title="My App"/>
+<interface><div><h1>Hello</h1></div></interface>
+```
+
+After
 
 ```xml
 <!AMML "master">
 
-<window
-    title="My Website"
-    charset="utf-8"
-    lang="en-US"/>
+<window title="My App"/>
 
 <interface>
-
-    <!element:src("menu.amml")/>
-
-    <!module:src("scripts.amml")/>
-
+    <div>
+        <h1>Hello</h1>
+    </div>
 </interface>
 ```
 
-Which compiles into a regular HTML document.
-
 ---
 
-# Project Types
+## 🧠 IntelliSense
 
-AMML currently supports three project types.
+The extension provides intelligent language support inside embedded code blocks.
 
-## Master
+Supported languages:
 
-The application's main file.
+- JavaScript
+- CSS
 
-Responsible for:
+That means you get:
 
-- Creating the HTML document
-- Configuring the page
-- Loading components
-- Loading modules
+- Autocomplete
+- Hover information
+- Documentation
+- Error checking
+- Warnings
+- Code validation
 
-Uses:
-
-- `<window/>`
-- `<interface>`
-
----
-
-## Component
-
-A reusable HTML fragment.
-
-Components only define an `<interface>` block and are intended to be inserted inside master files.
-
----
-
-## Module
-
-Defines JavaScript and CSS resources.
-
-Modules support:
-
-- `<javascript>`
-- `<css>`
-- `<file src="">`
-- `<file href="">`
-
-which automatically generate standard HTML tags such as `<script>`, `<style>` and `<link>`.
-
----
-
-# Special Tags
-
-Plugins are executed through special tags.
-
-General syntax:
+directly inside:
 
 ```xml
-<!plugin:option("value")/>
+<javascript>
+
+</javascript>
 ```
 
-Examples:
+and
+
+```xml
+<css>
+
+</css>
+```
+
+without leaving your AMML file.
+
+---
+
+## 🔍 Live Diagnostics
+
+Errors are detected while you type.
+
+The extension reports:
+
+- Unknown AMML syntax
+- Invalid structures
+- JavaScript errors
+- CSS errors
+- Embedded language diagnostics
+
+Everything updates in real time.
+
+---
+
+## 💬 Plugin Hover Documentation
+
+Hover any plugin name to instantly view its documentation.
+
+Example:
 
 ```xml
 <!element:src("menu.amml")/>
-
-<!repeat:5("<br/>")/>
-
-<!value:text("Hello!")/>
 ```
 
-Every plugin decides whether options and values are required.
+Hovering over **element** displays:
 
----
-
-# Built-in Plugins
-
-AMML v1.0 ships with **11 official plugins**, covering the most common tasks when building applications.
-
-Current plugin categories include:
-
-- Component insertion
-- Module loading
-- Value insertion
-- Text repetition
-- File loading
-- URL loading
-- Local cache support
-- Debug utilities
-- Resource management
-- HTML generation
-- Compilation helpers
-
-Every plugin contains metadata such as:
-
-- Author
-- Version
+- Plugin name
 - Description
-- Dependencies
-- Example
+- Version
+- Author
 - Supported features
+- Required commands
+- Internet requirements
+- Usage example
+- GitHub source
 
-which can be inspected directly from the CLI.
-
----
-
-# CLI Commands
-
-## Compilation
-
-Compile an AMML file:
-
-```bash
-amml compile project.amml --out index.html
-```
-
-Display the generated output without saving:
-
-```bash
-amml result project.amml
-```
-
-Run an AMML application:
-
-```bash
-amml run ./project
-```
+No need to open external documentation.
 
 ---
 
-## Cache
+## ⚡ Embedded JavaScript & CSS
 
-Clear cache:
+AMML isn't just syntax highlighted.
 
-```bash
-amml cache clear
+The extension fully recognizes embedded JavaScript and CSS.
+
+Example:
+
+```xml
+<javascript>
+const button = document.getElementById("btn");
+
+button.addEventListener("click", () => {
+
+});
+</javascript>
 ```
 
-Add cache entry:
+The editor behaves exactly as if you were editing a normal JavaScript file.
 
-```bash
-amml cache add
-```
-
-List cached entries:
-
-```bash
-amml cache list
-```
+The same applies to CSS.
 
 ---
 
-## Plugins
+## 🌐 Live Language Server
 
-Install plugin:
+The extension includes its own Language Server, providing modern editor features such as:
 
-```bash
-amml plugins install
-```
+- Live diagnostics
+- Hover information
+- Plugin documentation
+- IntelliSense
+- Embedded language support
+- Formatting
 
-Add local plugin:
-
-```bash
-amml plugins add myPlugin.js
-```
-
-Remove plugin:
-
-```bash
-amml plugins remove Element
-```
-
-List plugins:
-
-```bash
-amml plugins list
-```
-
-Plugin information:
-
-```bash
-amml plugins info Element
-```
-
-Plugin diagnostics:
-
-```bash
-amml plugins doctor Element
-```
-
-Restore official plugins:
-
-```bash
-amml plugins reset
-```
+Everything runs while you edit your project.
 
 ---
 
-# Creating Plugins
+# 📦 Current Features
 
-Creating plugins is intentionally simple.
-
-Create a JavaScript file beginning with:
-
-```js
-/**@plugin myPlugin*/
-```
-
-Export an object:
-
-```js
-module.exports = {
-    name: "My Plugin",
-    version: "1.0.0",
-    author: "Your Name",
-    description: "Plugin description",
-    example: '<!myPlugin("Hello")/>',
-    supports: [
-        "files",
-        "cache"
-    ],
-    returnsContent: true,
-    dependencies: {
-        requiresInternet: false,
-        commands: []
-    },
-    async func(context) { return "Generated text" }
-};
-```
-
-The plugin receives a complete Context API containing:
-
-- Tag information
-- Compiler settings
-- Current script path
-- Debug logger
-- Standard logger
-- Error helper
-
-Once created, simply install it:
-
-```bash
-amml plugins add myPlugin.js
-```
-
-or publish it anywhere online:
-
-```bash
-amml plugins install
-```
+- ✅ Syntax Highlighting
+- ✅ Theme-aware colors
+- ✅ Formatter
+- ✅ Embedded JavaScript support
+- ✅ Embedded CSS support
+- ✅ JavaScript diagnostics
+- ✅ CSS diagnostics
+- ✅ Hover documentation
+- ✅ Official plugin information
+- ✅ Language Server
+- ✅ IntelliSense
 
 ---
 
-# Roadmap
+# 🚧 Planned Features
 
-The first public version is now complete.
+The extension is under active development.
 
-The next planned features include:
+Upcoming features include:
 
-- ✅ More official plugins
-- ✅ Better special tags
-- ✅ Native Visual Studio Code extension (.vsix)
-- ✅ Full Language Server (autocomplete, diagnostics, hover, go-to-definition...)
-- 🚧 Better IntelliSense
-- 🚧 More built-in language features
-- 🚧 Web compilation service running on Render
-- 🚧 Community plugin ecosystem
-
----
-
-# License
-
-This project is licensed under the **ISC License**.
-
-See the LICENSE file for more information.
+- Auto-completion for AMML plugins
+- Auto-completion for plugin options
+- File path suggestions
+- Go to Definition
+- Rename Symbol
+- Code Actions
+- Quick Fixes
+- Project Explorer support
+- Better diagnostics
+- More intelligent formatting
 
 ---
 
-# Contributing
+# 📖 About AMML
 
-Contributions are always welcome!
+AMML (Advanced Modular Markup Language) is a markup language designed to organize large web projects through reusable components and a powerful plugin system.
 
-Whether you want to:
+Instead of replacing HTML, AMML compiles into standard HTML, XML, or JSON, making the final output compatible with browsers, Electron, servers, and other web technologies.
 
-- Report bugs
-- Suggest ideas
-- Improve documentation
-- Create plugins
-- Improve performance
-- Help with the VS Code extension
+Learn more in the main AMML repository.
 
-every contribution is appreciated.
+---
 
-If you enjoy this project, consider giving it a ⭐ on GitHub. It really helps the project grow and motivates future development.
+# ❤️ Feedback
 
-Thank you for checking out AMML!
+Found a bug?
+
+Have an idea?
+
+Want to contribute?
+
+Issues and pull requests are always welcome.
+
+If you enjoy the project, consider giving it a ⭐ on GitHub. It helps the project grow and supports future development.
+
+Happy coding with AMML!

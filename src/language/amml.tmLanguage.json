@@ -1,0 +1,130 @@
+{
+    "scopeName": "source.amml",
+    "patterns": [
+        { "include": "#amml-metadata" },
+        { "include": "#amml-plugins" },
+        { "include": "#js-block" },
+        { "include": "#css-block" },
+        { "include": "#tags" }
+    ],
+    "repository": {
+        "amml-metadata": {
+            "begin": "(<!)(AMML)",
+            "beginCaptures": {
+                "1": { "name": "punctuation.definition.tag.amml" },
+                "2": { "name": "keyword.other.amml" }
+            },
+            "end": "(>)",
+            "endCaptures": {
+                "1": { "name": "punctuation.definition.tag.amml" }
+            },
+            "patterns": [
+                { "include": "#strings" },
+                { "match": "\\b\\d+\\.\\d+\\.\\d+\\b", "name": "constant.numeric.amml" },
+                { "match": "\\bmodule\\b", "name": "constant.language.amml" }
+            ]
+        },
+        "amml-plugins": {
+            "begin": "(<!)([-a-zA-Z0-9_]+)(?:(:)([-a-zA-Z0-9_]+))?(\\()",
+            "beginCaptures": {
+                "1": { "name": "punctuation.definition.tag.amml" },
+                "2": { "name": "entity.name.namespace.amml" },
+                "3": { "name": "punctuation.separator.amml" },
+                "4": { "name": "entity.name.function.amml" },
+                "5": { "name": "punctuation.definition.parameters.amml" }
+            },
+            "end": "(\\))(\\s*/>)",
+            "endCaptures": {
+                "1": { "name": "punctuation.definition.parameters.amml" },
+                "2": { "name": "punctuation.definition.tag.amml" }
+            },
+            "patterns": [
+                { "include": "#strings" }
+            ]
+        },
+        "js-block": {
+            "begin": "(<)(javascript|script)(>)",
+            "beginCaptures": {
+                "1": { "name": "punctuation.definition.tag.amml" },
+                "2": { "name": "entity.name.tag.amml" },
+                "3": { "name": "punctuation.definition.tag.amml" }
+            },
+            "end": "(</)(javascript|script)(>)",
+            "endCaptures": {
+                "1": { "name": "punctuation.definition.tag.amml" },
+                "2": { "name": "entity.name.tag.amml" },
+                "3": { "name": "punctuation.definition.tag.amml" }
+            },
+            "contentName": "source.js",
+            "patterns": [{ "include": "source.js" }]
+        },
+        "css-block": {
+            "begin": "(<)(css|style)(>)",
+            "beginCaptures": {
+                "1": { "name": "punctuation.definition.tag.amml" },
+                "2": { "name": "entity.name.tag.amml" },
+                "3": { "name": "punctuation.definition.tag.amml" }
+            },
+            "end": "(</)(css|style)(>)",
+            "endCaptures": {
+                "1": { "name": "punctuation.definition.tag.amml" },
+                "2": { "name": "entity.name.tag.amml" },
+                "3": { "name": "punctuation.definition.tag.amml" }
+            },
+            "contentName": "source.css",
+            "patterns": [{ "include": "source.css" }]
+        },
+        "tags": {
+            "begin": "(</?)([-_a-zA-Z0-9:]+)",
+            "beginCaptures": {
+                "1": { "name": "punctuation.definition.tag.amml" },
+                "2": { "name": "entity.name.tag.amml" }
+            },
+            "end": "(/?>)",
+            "endCaptures": {
+                "1": { "name": "punctuation.definition.tag.amml" }
+            },
+            "patterns": [
+                { "include": "#tagStuff" }
+            ]
+        },
+        "tagStuff": {
+            "patterns": [
+                {
+                    "match": "([-_a-zA-Z0-9]+)\\s*(=)",
+                    "captures": {
+                        "1": { "name": "entity.other.attribute-name.amml" },
+                        "2": { "name": "punctuation.separator.key-value.amml" }
+                    }
+                },
+                {
+                    "match": "(?<!=)\\s+([-_a-zA-Z0-9]+)(?!\\s*=)",
+                    "captures": {
+                        "1": { "name": "entity.other.attribute-name.amml" }
+                    }
+                },
+                { "include": "#strings" }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "begin": "\"",
+                    "beginCaptures": { "0": { "name": "punctuation.definition.string.begin.amml" } },
+                    "end": "\"",
+                    "endCaptures": { "0": { "name": "punctuation.definition.string.end.amml" } },
+                    "name": "string.quoted.double.amml",
+                    "patterns": [{ "match": "\\\\.", "name": "constant.character.escape.amml" }]
+                },
+                {
+                    "begin": "'",
+                    "beginCaptures": { "0": { "name": "punctuation.definition.string.begin.amml" } },
+                    "end": "'",
+                    "endCaptures": { "0": { "name": "punctuation.definition.string.end.amml" } },
+                    "name": "string.quoted.single.amml",
+                    "patterns": [{ "match": "\\\\.", "name": "constant.character.escape.amml" }]
+                }
+            ]
+        }
+    }
+}

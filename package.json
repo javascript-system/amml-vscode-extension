@@ -1,0 +1,74 @@
+{
+  "name": "amml-language",
+  "displayName": "amml",
+  "description": "This extension adds full, native support for the AMML (Advanced Modular Markup Language) language to Visual Studio Code, featuring a high-performance Language Server to boost your productivity.",
+  "version": "1.0.0",
+  "author": "javascript-system",
+  "icon": "src/icons/AMML.png",
+  "license": "MIT",
+  "publisher": "javascript-system",
+  "engines": {
+    "vscode": "^1.125.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "amml",
+        "aliases": [
+          "Advanced Modular Markup Language"
+        ],
+        "extensions": [
+          ".amml"
+        ],
+        "configuration": "./src/language/language-configuration.json",
+        "icon": {
+          "light": "./src/icons/icon-light.svg",
+          "dark": "./src/icons/icon.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "amml",
+        "scopeName": "source.amml",
+        "path": "./src/language/amml.tmLanguage.json",
+        "injectTo": [
+          "text.xml"
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  },
+  "dependencies": {
+    "axios": "^1.18.1",
+    "is-self-closing": "^1.0.1",
+    "vscode-css-languageservice": "^6.3.10",
+    "vscode-html-languageservice": "^5.6.2",
+    "vscode-languageclient": "^10.1.0",
+    "vscode-languageserver": "^10.1.0",
+    "vscode-languageserver-textdocument": "^1.0.13",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.61.1",
+    "eslint": "^10.5.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "24.x",
+    "@types/vscode": "^1.125.0",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0"
+  }
+}

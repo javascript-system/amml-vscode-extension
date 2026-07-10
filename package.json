@@ -1,6 +1,6 @@
 {
   "name": "amml",
-  "displayName": "amml",
+  "displayName": "amml-lang",
   "description": "This extension adds full, native support for the AMML (Advanced Modular Markup Language) language to Visual Studio Code, featuring a high-performance Language Server to boost your productivity.",
   "version": "1.0.0",
   "author": "javascript-system",

@@ -5,20 +5,15 @@ import { TextDocument } from 'vscode-languageserver-textdocument';
 import { CompletionList, CompletionItem, CompletionItemKind, Diagnostic, DiagnosticSeverity, Position, Hover } from 'vscode-languageserver';
 const tsLibDirectory = path.dirname(require.resolve('typescript'));
 
-const compilerOptions: ts.CompilerOptions = { 
-    allowNonTsExtensions: true, 
-    allowJs: true, 
-    checkJs: true, 
-    strictNullChecks: false,
-    noImplicitAny: false, 
-    noUnusedLocals: false, 
-    noUnusedParameters: false, 
-    target: ts.ScriptTarget.Latest, 
-    moduleResolution: ts.ModuleResolutionKind.NodeJs, 
-    lib: ['DOM', 'DOM.Iterable', 'ES2020', 'ESNext'], 
-    types: ['node'], 
-    allowSyntheticDefaultImports: true, 
-    esModuleInterop: true 
+const compilerOptions: ts.CompilerOptions = {
+  allowJs: true,
+  checkJs: false,
+  skipLibCheck: true,
+  noEmit: true,
+  target: ts.ScriptTarget.Latest,
+  moduleResolution: ts.ModuleResolutionKind.NodeJs,
+  esModuleInterop: true,
+  allowSyntheticDefaultImports: true
 };
 
 
